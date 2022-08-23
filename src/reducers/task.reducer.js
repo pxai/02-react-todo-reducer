@@ -1,4 +1,3 @@
-import { createContext, useState } from 'react';
 import tasks from '../initialTasks';
 
 const addTaskToTasks = (tasks, taskToAdd) => {

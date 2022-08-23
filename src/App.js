@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect, useReducer } from 'react';
+import { useCallback, useMemo, useReducer } from 'react';
 import TaskList from './TaskList';
 import TaskForm from './TaskForm';
 import TaskSearchForm from './TaskSearchForm';
@@ -10,9 +10,7 @@ import { TASKS_ACTION_TYPES, initialTaskState, taskReducer } from './reducers/ta
 function App() {
   const [state, dispatch] = useReducer(taskReducer, initialTaskState);
 
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const printTaskList = useCallback(() => {
+  useCallback(() => {
     console.log("Changed List: ", state.tasks)
   }, [state.tasks]);
 
@@ -36,13 +34,9 @@ function App() {
     return state.tasks.filter((task) => {
       return task.name.toLowerCase().includes(state.searchTerm.toLowerCase());
     })
-  }, [searchTerm, state.tasks]);
+  }, [state.searchTerm, state.tasks]);
 
-  /*
-  () => tasks.filter((task) => {
-    return task.name.toLowerCase().includes(searchTerm.toLowerCase());
-  }),
-  */
+
   return (
     <div className="App">
       <TaskSearchForm handleSearch={handleSearch}/>
